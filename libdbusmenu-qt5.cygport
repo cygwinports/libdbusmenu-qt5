@@ -1,0 +1,24 @@
+inherit qt5 cmake
+
+NAME="libdbusmenu-qt5"
+VERSION=0.9.3
+RELEASE=0.1.20140604bzr
+CATEGORY="Libs"
+SUMMARY="Qt5 DBusMenu implementation"
+DESCRIPTION="This library provides a Qt implementation of the DBusMenu protocol.
+The DBusMenu protocol makes it possible for applications to export and import
+their menus over DBus."
+HOMEPAGE="https://launchpad.net/libdbusmenu-qt"
+#SRC_URI="http://launchpad.net/libdbusmenu-qt/trunk/${VERSION}/+download/${NAME}-${VERSION}.tar.bz2"
+md5sum=f2d3bc25992e001bcf5ebde9e3e818dd
+SRC_URI="http://pkgs.fedoraproject.org/repo/pkgs/dbusmenu-qt5/libdbusmenu-qt5-${VERSION}-${RELEASE##*\.}.tar.bz2/${md5sum}/libdbusmenu-qt5-${VERSION}-${RELEASE##*\.}.tar.bz2"
+SRC_DIR="libdbusmenu-qt5-${VERSION}"
+PATCH_URI="0.9.3-cmake-install.patch"
+
+PKG_NAMES="${NAME}_2 ${NAME}-devel ${NAME}-doc"
+libdbusmenu_qt5_2_CONTENTS="--exclude=html usr/bin/cygdbusmenu-qt5-2.dll usr/share/doc/"
+libdbusmenu_qt5_devel_REQUIRES="libQt5Core-devel"
+libdbusmenu_qt5_devel_CONTENTS="usr/include/ usr/lib/"
+libdbusmenu_qt5_doc_CONTENTS="usr/share/doc/${NAME}/html/"
+
+CYGCMAKE_ARGS="-D__DBUSMENU_HAVE_GCC_VISIBILITY=OFF"
